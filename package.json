@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "commit": "git add . && git commit -m \"temp\""
+    "commit": "git add . && git commit -m \"\""
   },
   "dependencies": {
     "react": "^18.2.0",
