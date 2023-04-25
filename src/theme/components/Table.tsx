@@ -13,6 +13,7 @@ export default function TableOverride(theme: Theme): Components {
     MuiTableCell: {
       styleOverrides: {
         head: {
+          fontWeight: 600,
           backgroundColor: theme.palette.grey[100],
           ":first-of-type": {
             borderTopLeftRadius: 12,
