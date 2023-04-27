@@ -1,16 +1,13 @@
+import { MonitorRounded } from "@mui/icons-material";
 import {
   Card,
   CardContent,
   CardHeader,
   Divider,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import {
   CategoryScale,
@@ -24,10 +21,9 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import EnhancedTable from "./Table";
-import { MonitorRounded } from "@mui/icons-material";
-import React from "react";
 
 export default function RootPage() {
+  const theme = useTheme();
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -37,8 +33,6 @@ export default function RootPage() {
     Tooltip,
     Legend
   );
-
-  const [interval, setInterval] = React.useState<number>(0);
 
   const options = {
     responsive: true,
@@ -57,38 +51,23 @@ export default function RootPage() {
       {
         label: "Dataset 1",
         data: [4, 23, 23, 12, 3, 5, 7],
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.dark,
       },
     ],
-  };
-
-  const handleInterval = (e: SelectChangeEvent<number>) => {
-    setInterval(Number(e.target.value));
   };
 
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
-        <Stack direction="row" justifyContent="space-between">
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ color: "primary.dark" }}
-          >
-            <MonitorRounded fontSize="large" />
-            <Typography variant="h4">Monitor</Typography>
-          </Stack>
-          <FormControl size="small">
-            <InputLabel>Interval</InputLabel>
-            <Select value={interval} onChange={handleInterval} label="Interval">
-              <MenuItem value={0}>15 seconds</MenuItem>
-              <MenuItem value={1}>30 seconds</MenuItem>
-              <MenuItem value={2}>1 minute</MenuItem>
-              <MenuItem value={3}>10 minutes</MenuItem>
-            </Select>
-          </FormControl>
+        <Stack
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          sx={{ color: "primary.dark" }}
+        >
+          <MonitorRounded fontSize="large" />
+          <Typography variant="h4">Monitor</Typography>
         </Stack>
       </Grid>
       <Grid item xs={12}>

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-sec-fe-dpl
+spec:
+  selector:
+    matchLabels:
+      app: k8s-sec-fe
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-sec-fe
+    spec:
+      containers:
+        - name: k8s-sec-fe
+          image: huyvdq/k8s_sec_fe
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-sec-fe-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: k8s-sec-fe
+  ports:
+    - port: 3000
+      targetPort: 3000
