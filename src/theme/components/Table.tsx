@@ -12,6 +12,10 @@ export default function TableOverride(theme: Theme): Components {
     },
     MuiTableCell: {
       styleOverrides: {
+        root: {
+          paddingTop: 12,
+          paddingBottom: 12,
+        },
         head: {
           fontWeight: 600,
           backgroundColor: theme.palette.grey[100],
@@ -21,6 +25,9 @@ export default function TableOverride(theme: Theme): Components {
           ":last-of-type": {
             borderTopRightRadius: 12,
           },
+        },
+        body: {
+          color: theme.palette.grey[700],
         },
       },
     },

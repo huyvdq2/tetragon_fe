@@ -4,6 +4,7 @@ import PaperOverride from "./Paper";
 import TableOverride from "./Table";
 import ListOverride from "./List";
 import SelectOverride from "./Select";
+import ChipOverride from "./Chip";
 
 export const components = (theme: Theme): Components => {
   return {
@@ -12,5 +13,6 @@ export const components = (theme: Theme): Components => {
     ...TableOverride(theme),
     ...ListOverride(theme),
     ...SelectOverride(theme),
+    ...ChipOverride(theme),
   };
 };

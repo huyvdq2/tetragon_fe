@@ -1,4 +1,4 @@
-import { MonitorRounded } from "@mui/icons-material";
+import { LegendToggleRounded, MonitorRounded } from "@mui/icons-material";
 import {
   Button,
   Divider,
@@ -14,16 +14,34 @@ import {
 import Logo from "assets/favicon.png";
 import React from "react";
 import docs from "assets/illustration_docs.svg";
+import paths from "routes/paths";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const navigate = useNavigate();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
+    index: number,
+    path: string
   ) => {
+    navigate(path);
     setSelectedIndex(index);
   };
+
+  const routes = [
+    {
+      icon: <MonitorRounded />,
+      label: "Monitor",
+      path: paths.root,
+    },
+    {
+      icon: <LegendToggleRounded />,
+      label: "Logging",
+      path: paths.log,
+    },
+  ];
 
   return (
     <Drawer variant="permanent">
@@ -40,30 +58,36 @@ export default function NavBar() {
           </Stack>
           <Divider />
           <List>
-            <ListItem
-              sx={{
-                "& .Mui-selected": {
-                  bgcolor: "grey.100",
-                  borderRadius: 1,
-                  color: "primary.main",
-                  fontWeight: 600,
-                },
-              }}
-            >
-              <ListItemButton
-                selected={selectedIndex === 0}
-                onClick={(event) => {
-                  handleListItemClick(event, 0);
+            {routes.map((route, index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  mb: 1,
+                  "& .Mui-selected": {
+                    bgcolor: "grey.100",
+                    color: "primary.main",
+                    fontWeight: 600,
+                  },
                 }}
               >
-                <ListItemIcon sx={{ color: "inherit" }}>
-                  <MonitorRounded />
-                </ListItemIcon>
-                <ListItemText sx={{ span: { fontWeight: "inherit" } }}>
-                  Monitor
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
+                <ListItemButton
+                  selected={selectedIndex === index}
+                  sx={{
+                    borderRadius: 1,
+                  }}
+                  onClick={(event) => {
+                    handleListItemClick(event, index, route.path);
+                  }}
+                >
+                  <ListItemIcon sx={{ color: "inherit" }}>
+                    {route.icon}
+                  </ListItemIcon>
+                  <ListItemText sx={{ span: { fontWeight: "inherit" } }}>
+                    {route.label}
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
         </Stack>
         <Stack alignItems="center" spacing={1} mb={2}>
@@ -77,6 +101,8 @@ export default function NavBar() {
           <Button
             variant="contained"
             sx={{ fontWeight: 600, textTransform: "none" }}
+            href="https://github.com/snowline2015/Kubernetes-Security"
+            target="_blank"
           >
             Documentation
           </Button>

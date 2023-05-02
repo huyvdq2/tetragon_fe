@@ -6,7 +6,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import routes from "routes";
 import theme from "theme";
-import { type RoutesType } from "types/routes";
+import { type RoutesType } from "types/routes.type";
 
 function App() {
   const renderRoutes = React.useCallback(
@@ -37,10 +37,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes>
-        {renderRoutes(routes)}
-        <Route path="*" element={<Page404 />} />
-      </Routes>
+      <React.Suspense fallback={<>loading...</>}>
+        <Routes>
+          {renderRoutes(routes)}
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </React.Suspense>
     </ThemeProvider>
   );
 }
