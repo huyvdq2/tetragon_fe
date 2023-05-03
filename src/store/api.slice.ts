@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PodData } from "types/api.type";
+import { LogData, PodData } from "types/api.type";
 
 export const api = createApi({
   reducerPath: "api",
@@ -30,8 +30,19 @@ export const api = createApi({
       }),
       invalidatesTags: ["pod"],
     }),
+    getLogs: builder.query({
+      query: (params: { result: number; status: string }) => ({
+        url: "/logs",
+        params,
+      }),
+      transformResponse: (response: { data: LogData[] }) => response.data,
+    }),
   }),
 });
 
-export const { useGetPodsQuery, useGetResourcesQuery, useDeletePodMutation } =
-  api;
+export const {
+  useGetPodsQuery,
+  useGetResourcesQuery,
+  useDeletePodMutation,
+  useGetLogsQuery,
+} = api;

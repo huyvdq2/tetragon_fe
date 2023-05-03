@@ -9,7 +9,17 @@ export default function MainLayout({
   return (
     <Stack direction="row">
       <NavBar />
-      <Box sx={{ ml: "280px", pt: 8, width: 1, pb: 5 }}>
+      <Box
+        sx={{
+          ml: {
+            lg: "280px",
+            xs: "72px",
+          },
+          pt: 8,
+          width: 1,
+          pb: 5,
+        }}
+      >
         <Container maxWidth="lg">{children}</Container>
       </Box>
     </Stack>

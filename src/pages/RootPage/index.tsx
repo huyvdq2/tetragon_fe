@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import EnhancedTable from "./Table";
+import Table from "./Table";
 import { useGetPodsQuery } from "store/api.slice";
 
 export default function RootPage() {
@@ -46,7 +46,7 @@ export default function RootPage() {
         <Card>
           <CardHeader title="Cluster" />
           <CardContent>
-            <EnhancedTable data={data} />
+            <Table data={data} />
           </CardContent>
         </Card>
       </Grid>

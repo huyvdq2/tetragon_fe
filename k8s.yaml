@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: k8s-sec-fe
-          image: huyvdq/k8s_sec_fe
+          image: huyvdq/k8s-sec-fe
 
 ---
 apiVersion: v1

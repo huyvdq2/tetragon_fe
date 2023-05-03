@@ -1,8 +1,14 @@
-import { LegendToggleRounded, MonitorRounded } from "@mui/icons-material";
 import {
+  ArticleRounded,
+  LegendToggleRounded,
+  MonitorRounded,
+} from "@mui/icons-material";
+import {
+  Box,
   Button,
   Divider,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -18,18 +24,6 @@ import paths from "routes/paths";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const navigate = useNavigate();
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-    path: string
-  ) => {
-    navigate(path);
-    setSelectedIndex(index);
-  };
-
   const routes = [
     {
       icon: <MonitorRounded />,
@@ -43,16 +37,56 @@ export default function NavBar() {
     },
   ];
 
+  const [selectedIndex, setSelectedIndex] = React.useState(
+    routes.findIndex((route) =>
+      route.path.includes(window.location.pathname)
+    ) ?? 0
+  );
+  const navigate = useNavigate();
+
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+    path: string
+  ) => {
+    navigate(path);
+    setSelectedIndex(index);
+  };
+
   return (
     <Drawer variant="permanent">
       <Stack
-        sx={{ width: 280, p: 1, height: 1 }}
+        sx={{
+          width: {
+            lg: 280,
+            xs: 72,
+          },
+          overflowX: "hidden",
+          p: 1,
+          height: 1,
+        }}
         justifyContent="space-between"
       >
         <Stack spacing={3}>
           <Stack direction="row" spacing={1} alignItems={"center"}>
-            <img alt="Logo" src={Logo} width={40} height={40} />
-            <Typography fontSize={17} fontWeight={600} color="primary">
+            <img
+              alt="Logo"
+              src={Logo}
+              width={40}
+              height={40}
+              style={{ marginLeft: 8 }}
+            />
+            <Typography
+              fontSize={20}
+              fontWeight={600}
+              color="primary"
+              sx={{
+                display: {
+                  lg: "initial",
+                  xs: "none",
+                },
+              }}
+            >
               Kubernetes Security
             </Typography>
           </Stack>
@@ -91,21 +125,43 @@ export default function NavBar() {
           </List>
         </Stack>
         <Stack alignItems="center" spacing={1} mb={2}>
-          <img alt="Docs" src={docs} />
-          <Typography variant="body1" fontWeight={600}>
+          <Box sx={{ display: { lg: "initial", xs: "none" } }}>
+            <img alt="Docs" src={docs} />
+          </Box>
+          <Typography
+            variant="body1"
+            fontWeight={600}
+            sx={{ display: { lg: "initial", xs: "none" } }}
+          >
             Hi, need help?
           </Typography>
-          <Typography variant="body2" color="grey.500">
+          <Typography
+            variant="body2"
+            color="grey.500"
+            sx={{ display: { lg: "initial", xs: "none" } }}
+          >
             Please check our docs.
           </Typography>
           <Button
             variant="contained"
-            sx={{ fontWeight: 600, textTransform: "none" }}
+            sx={{
+              fontWeight: 600,
+              textTransform: "none",
+              display: { lg: "initial", xs: "none" },
+            }}
             href="https://github.com/snowline2015/Kubernetes-Security"
             target="_blank"
           >
             Documentation
           </Button>
+          <IconButton
+            href="https://github.com/snowline2015/Kubernetes-Security"
+            target="_blank"
+            size="large"
+            sx={{ display: { lg: "none", xs: "inherit" } }}
+          >
+            <ArticleRounded color="primary" fontSize="large" />
+          </IconButton>
         </Stack>
       </Stack>
     </Drawer>

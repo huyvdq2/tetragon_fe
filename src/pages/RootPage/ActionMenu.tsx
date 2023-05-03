@@ -33,12 +33,31 @@ export default function ActionMenu({
   };
 
   return (
-    <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+    <Menu
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      PaperProps={{
+        sx: {
+          boxShadow: (theme) => theme.shadows[3],
+        },
+      }}
+    >
       <MenuItem onClick={handleDeletePod}>
         <ListItemIcon>
           <DeleteRounded fontSize="small" />
         </ListItemIcon>
-        <ListItemText>Delete</ListItemText>
+        <ListItemText sx={{ position: "relative", top: 1 }}>
+          Delete
+        </ListItemText>
       </MenuItem>
     </Menu>
   );

@@ -25,7 +25,7 @@ function createData(
   return { host_ip, image, image_id, ip, kind, name, namespace, status };
 }
 
-export default function BasicTable({ data }: { data: PodData[] }) {
+export default function MuiTable({ data }: { data: PodData[] }) {
   const { data: resources = [] } = useGetResourcesQuery({});
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

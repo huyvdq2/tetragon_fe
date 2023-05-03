@@ -8,3 +8,11 @@ export interface PodData {
   namespace: string;
   status: string;
 }
+
+export interface LogData {
+  level: string;
+  message: string;
+  namespace: string;
+  pod: string;
+  timestamp: string;
+}
