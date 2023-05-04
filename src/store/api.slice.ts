@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LogData, PodData } from "types/api.type";
+import { LogData, PodData, ResourcesData } from "types/api.type";
 
 export const api = createApi({
   reducerPath: "api",
@@ -13,17 +13,11 @@ export const api = createApi({
     }),
     getResources: builder.query({
       query: () => "/resources",
-      transformResponse: (response: {
-        data: Array<{
-          cpu: string;
-          memory: string;
-          name: string;
-        }>;
-      }) => response.data,
+      transformResponse: (response: { data: ResourcesData[] }) => response.data,
       providesTags: ["pod"],
     }),
     deletePod: builder.mutation({
-      query: (params: { name: string; namespace: string }) => ({
+      query: (params: { pod: string; namespace: string }) => ({
         url: "/pods",
         method: "DELETE",
         params,
@@ -31,11 +25,12 @@ export const api = createApi({
       invalidatesTags: ["pod"],
     }),
     getLogs: builder.query({
-      query: (params: { result: number; status: string }) => ({
+      query: (params: { status: string }) => ({
         url: "/logs",
         params,
       }),
       transformResponse: (response: { data: LogData[] }) => response.data,
+      transformErrorResponse: () => [],
     }),
   }),
 });

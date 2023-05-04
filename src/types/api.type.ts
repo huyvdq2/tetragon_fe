@@ -9,6 +9,12 @@ export interface PodData {
   status: string;
 }
 
+export interface ResourcesData {
+  cpu: string;
+  memory: string;
+  name: string;
+}
+
 export interface LogData {
   level: string;
   message: string;

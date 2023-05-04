@@ -10,10 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import Table from "./Table";
-import { useGetPodsQuery } from "store/api.slice";
+import { useGetPodsQuery, useGetResourcesQuery } from "store/api.slice";
 
 export default function RootPage() {
   const { data = [], refetch } = useGetPodsQuery({});
+  const { data: resources = [], refetch: resourcesRefetch } =
+    useGetResourcesQuery({});
 
   return (
     <Grid container spacing={4}>
@@ -33,6 +35,7 @@ export default function RootPage() {
             startIcon={<RefreshRounded />}
             onClick={async () => {
               await refetch();
+              await resourcesRefetch();
             }}
           >
             Refresh
@@ -46,7 +49,7 @@ export default function RootPage() {
         <Card>
           <CardHeader title="Cluster" />
           <CardContent>
-            <Table data={data} />
+            <Table data={data} resources={resources} />
           </CardContent>
         </Card>
       </Grid>

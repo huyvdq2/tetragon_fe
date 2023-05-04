@@ -23,7 +23,7 @@ export default function ActionMenu({
   const handleDeletePod = async () => {
     try {
       await deletePod({
-        name: target?.name,
+        pod: target?.name,
         namespace: target?.namespace,
       }).unwrap();
     } catch (error) {

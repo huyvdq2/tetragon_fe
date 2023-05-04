@@ -8,9 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
-import { useGetResourcesQuery } from "store/api.slice";
+import { PodData, ResourcesData } from "types/api.type";
 import ActionMenu from "./ActionMenu";
-import { PodData } from "types/api.type";
 
 function createData(
   host_ip: string,
@@ -25,9 +24,13 @@ function createData(
   return { host_ip, image, image_id, ip, kind, name, namespace, status };
 }
 
-export default function MuiTable({ data }: { data: PodData[] }) {
-  const { data: resources = [] } = useGetResourcesQuery({});
-
+export default function MuiTable({
+  data,
+  resources,
+}: {
+  data: PodData[];
+  resources: ResourcesData[];
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [target, setTarget] = React.useState<{
     name: string;

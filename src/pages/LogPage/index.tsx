@@ -14,7 +14,6 @@ import Table from "./Table";
 
 export default function LogPage() {
   const { data = [], refetch } = useGetLogsQuery({
-    result: 10,
     status: "deleted",
   });
 
