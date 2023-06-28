@@ -3,7 +3,9 @@ import { LogData, PodData, ResourcesData } from "types/api.type";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:50000/api/v1" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://kube-sec-be.kube-security.svc.cluster.local:50000/api/v1",
+  }),
   tagTypes: ["pod"],
   endpoints: (builder) => ({
     getPods: builder.query({
